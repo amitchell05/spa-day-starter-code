@@ -9,29 +9,25 @@
 </head>
 <body>
     <form method="post">
-        <div>
-            <label>Username
-                <input type="text" name="username">
-            </label>
-        </div>
-        <div>
-            <label>Email
-                <input type="email" name="email">
-            </label>
-        </div>
-        <div>
-            <label>Password
-                <input type="password" name="password">
-            </label>
-        </div>
-        <div>
-            <label>Verify Password
-                <input type="password" name="verify">
-            </label>
-        </div>
-        <div>
-            <input type="submit" value="Create">
-        </div>
+        <label>Username:
+            <input type="text" name="username" th:value="${username}">
+        </label>
+
+        <label>Email:
+            <input type="email" name="email" th:value="${email}">
+        </label>
+
+        <label>Password:
+            <input type="password" name="password">
+        </label>
+
+        <label>Verify Password:
+            <input type="password" name="verify">
+        </label>
+
+        <p th:text="${error}"></p>
+
+        <input type="submit" value="Sign Up">
     </form>
 </body>
 </html>
