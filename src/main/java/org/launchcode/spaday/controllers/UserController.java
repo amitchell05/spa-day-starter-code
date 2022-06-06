@@ -1,5 +1,6 @@
 package org.launchcode.spaday.controllers;
 
+import org.launchcode.spaday.data.UserData;
 import org.launchcode.spaday.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("user")
 public class UserController {
 
+    @GetMapping("index")
+    public String displayAllUsers(Model model) {
+        model.addAttribute("title", "All Users");
+        model.addAttribute("users", UserData.getAll());
+        return "user/index";
+    }
+
     @GetMapping("add")
     public String displayAddUserForm(Model model) {
         model.addAttribute("title", "Create User");
@@ -21,6 +29,7 @@ public class UserController {
     @PostMapping("add")
     public String processAddUserForm(Model model, @ModelAttribute User user, String verify) {
         if (verify.equals(user.getPassword())) {
+            UserData.add(user);
             return "user/index";
         }
 

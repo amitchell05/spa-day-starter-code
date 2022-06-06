@@ -8,6 +8,10 @@
     <title>Create Spa User</title>
 </head>
 <body>
+    <header th:replace="fragments :: header"></header>
+
+    <h1 th:text="${title}"></h1>
+
     <form method="post">
         <label>Username:
             <input type="text" name="username" th:value="${username}">
