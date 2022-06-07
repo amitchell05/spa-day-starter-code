@@ -2,6 +2,7 @@ package org.launchcode.spaday.models;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
@@ -18,6 +19,9 @@ public class User {
 
     @NotBlank(message = "Please enter a password")
     private String password;
+
+    @NotNull(message = "Passwords do not match")
+    private String verifyPassword;
 
     public User() {
         id = nextId;
@@ -57,6 +61,16 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        this.checkPassword();
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
+        this.checkPassword();
     }
 
     @Override
@@ -71,5 +85,12 @@ public class User {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    private void checkPassword() {
+        if ((this.password != null && this.verifyPassword != null) && !(this.password.equals(this.verifyPassword))) {
+            this.verifyPassword = null;
+        }
+    }
+
 }
 
